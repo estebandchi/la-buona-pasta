@@ -81,7 +81,7 @@
   --nav-h:64px;--mobile-cta-h:72px;
 }
 html{scroll-behavior:smooth;scroll-padding-top:var(--nav-h)}
-body{font-family:var(--font-body);color:var(--text-dark);background:var(--cream);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+body{font-family:var(--font-body);color:var(--text-dark);background:var(--cream);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;overscroll-behavior-y:none;-webkit-overflow-scrolling:touch}
 h1,h2,h3,h4{font-family:var(--font-heading);font-weight:700;line-height:1.15}
 h1{font-weight:800}
 a{color:inherit;text-decoration:none}
@@ -108,7 +108,7 @@ img{max-width:100%;display:block}
 /* Mobile Nav Drawer */
 .nav-drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:150}
 .nav-drawer-overlay.open{display:block}
-.nav-drawer{position:fixed;top:0;right:-300px;width:280px;height:100vh;background:var(--dark);z-index:200;transition:right .3s ease;padding:24px;display:flex;flex-direction:column}
+.nav-drawer{position:fixed;top:0;right:-300px;width:280px;height:100vh;background:var(--dark);z-index:200;transition:right .3s ease;padding:24px;display:flex;flex-direction:column;overscroll-behavior:contain}
 .nav-drawer.open{right:0}
 .nav-drawer-close{align-self:flex-end;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--text-light-2);font-size:28px;border-radius:var(--radius-sm)}
 .nav-drawer-close:hover{color:var(--text-light)}
@@ -269,27 +269,87 @@ img{max-width:100%;display:block}
   .gallery-strip img{height:200px}
 }
 @media(max-width:768px){
+  /* Nav */
+  .nav{padding-top:env(safe-area-inset-top,0px);background:rgba(26,22,18,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
   .nav-links{display:none}
   .hamburger{display:flex}
-  .section{padding:60px 20px}
-  .section-header{margin-bottom:40px}
-  .hero-ctas{flex-direction:column;align-items:stretch;padding:0 16px}
-  .hero-ctas .btn{justify-content:center}
-  .hero-logo{width:96px;height:96px}
-  .dishes-grid{grid-template-columns:1fr}
-  .mobile-cta{display:block}
-  .footer{padding-bottom:calc(40px + var(--mobile-cta-h) + env(safe-area-inset-bottom,0px))}
-  .contact-map{min-height:260px}
-  .contact-map iframe{min-height:260px}
+  .nav-brand img{width:36px;height:36px}
+  .nav-logo{font-size:19px}
+
+  /* Sections */
+  .section{padding:48px 16px}
+  .section-header{margin-bottom:32px}
+  .section-header p{font-size:16px}
+
+  /* Hero */
+  .hero{min-height:100svh}
+  .hero-content{padding:0 20px}
+  .hero-logo{width:72px;height:72px;margin-bottom:16px;border-width:2px}
+  .hero-badge{padding:6px 16px;font-size:13px;margin-bottom:16px}
+  .hero h1{margin-bottom:10px}
+  .hero-tagline{font-size:18px;margin-bottom:8px}
+  .hero-sub{font-size:14px;margin-bottom:28px}
+  .hero-ctas{flex-direction:column;align-items:stretch;padding:0 8px;gap:10px}
+  .hero-ctas .btn{justify-content:center;padding:13px 24px;font-size:15px;min-height:48px}
+  .hero-scroll{bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+
+  /* Dishes */
+  .dishes-grid{grid-template-columns:1fr;gap:20px}
+  .dish-img{height:260px}
+  .dish-body{padding:16px}
+  .dish-body h3{font-size:20px}
+
+  /* Gallery — horizontal scroll strip */
+  .gallery-strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:4px;max-height:200px;scrollbar-width:none}
+  .gallery-strip::-webkit-scrollbar{display:none}
+  .gallery-strip img{flex:0 0 75vw;height:200px;scroll-snap-align:start;border-radius:0}
+
+  /* Menu */
   .menu-items{grid-template-columns:1fr}
-  .gallery-strip{grid-template-columns:1fr 1fr;max-height:160px}
-  .gallery-strip img{height:160px}
+  .menu-item{padding:12px 0}
+  .menu-item-name{font-size:16px}
+  .menu-item-price{font-size:16px}
+  .menu-detail-header h3{font-size:22px}
+
+  /* Contact */
+  .contact-map{min-height:260px;border-radius:var(--radius-sm)}
+  .contact-map iframe{min-height:260px}
+
+  /* Footer */
+  .footer{padding:32px 16px calc(32px + var(--mobile-cta-h) + env(safe-area-inset-bottom,0px))}
+  .footer-inner{flex-direction:column;text-align:center;gap:16px}
+  .footer-info{font-size:15px}
+  .footer-credit{font-size:14px}
+
+  /* Mobile CTA Bar */
+  .mobile-cta{display:block;border-top:none;box-shadow:0 -4px 20px rgba(0,0,0,.25)}
+  .mobile-cta-btn{font-size:14px;padding:14px 10px;border-radius:var(--radius)}
+  .mobile-cta-btn:active{transform:scale(.92);opacity:.85}
+
+  /* Touch feedback */
+  .btn:active{transform:scale(.95) !important;opacity:.9}
+  .why-card:active{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+  .dish-card:active{transform:translateY(-2px)}
+  .menu-cat:active{transform:translateY(-1px)}
 }
 @media(max-width:480px){
-  .hero h1{font-size:36px}
-  .section-header h2{font-size:28px}
-  .why-grid{grid-template-columns:1fr}
-  .menu-categories{grid-template-columns:1fr 1fr}
+  .section{padding:40px 16px}
+  .section-header{margin-bottom:28px}
+  .hero h1{font-size:32px;letter-spacing:.5px}
+  .hero-logo{width:64px;height:64px}
+  .section-header h2{font-size:26px}
+  .why-grid{grid-template-columns:1fr;gap:16px}
+  .why-card{padding:24px 20px}
+  .why-icon{width:48px;height:48px}
+  .why-icon svg{width:24px;height:24px}
+  .menu-categories{grid-template-columns:1fr 1fr;gap:12px}
+  .menu-cat{padding:20px 16px}
+  .menu-cat-icon{font-size:28px;margin-bottom:8px}
+  .menu-cat h3{font-size:17px}
+  .gallery-strip img{flex:0 0 80vw;height:180px}
+  .atmosphere-img,.about-img{height:220px}
+  .contact-icon{width:40px;height:40px}
+  .dish-img{height:240px}
 }
 </style>
 </head>
@@ -427,7 +487,7 @@ img{max-width:100%;display:block}
     <div class="dishes-grid">
       <div class="dish-card fade-up" style="transition-delay:.1s">
         <div class="dish-img">
-          <img src="img/lbp/pasta-bolognese.jpg" alt="Pappardelle bolognese con parmesano fresco y albahaca, banada en aceite de oliva" loading="lazy">
+          <img src="img/lbp/pasta-bolognese.jpg" alt="Pappardelle bolognese con parmesano fresco y albahaca, banada en aceite de oliva" width="400" height="260" loading="lazy">
         </div>
         <div class="dish-body">
           <h3>Pasta Bolognese</h3>
@@ -436,7 +496,7 @@ img{max-width:100%;display:block}
       </div>
       <div class="dish-card fade-up" style="transition-delay:.2s">
         <div class="dish-img">
-          <img src="img/lbp/shrimp-fettuccine.jpg" alt="Fettuccine con camarones crujientes y luces calidas del restaurante" loading="lazy">
+          <img src="img/lbp/shrimp-fettuccine.jpg" alt="Fettuccine con camarones crujientes y luces calidas del restaurante" width="400" height="260" loading="lazy">
         </div>
         <div class="dish-body">
           <h3>Fettuccine con Camarones</h3>
@@ -445,7 +505,7 @@ img{max-width:100%;display:block}
       </div>
       <div class="dish-card fade-up" style="transition-delay:.3s">
         <div class="dish-img">
-          <img src="img/lbp/pizza.jpg" alt="Pizza artesanal recien salida del horno servida en la mesa" loading="lazy">
+          <img src="img/lbp/pizza.jpg" alt="Pizza artesanal recien salida del horno servida en la mesa" width="400" height="260" loading="lazy">
         </div>
         <div class="dish-body">
           <h3>Pizza Artesanal</h3>
@@ -454,7 +514,7 @@ img{max-width:100%;display:block}
       </div>
       <div class="dish-card fade-up" style="transition-delay:.4s">
         <div class="dish-img">
-          <img src="img/lbp/meat-vegetables.jpg" alt="Carne jugosa con vegetales asados acompanada de vino tinto y limoncino" loading="lazy">
+          <img src="img/lbp/meat-vegetables.jpg" alt="Carne jugosa con vegetales asados acompanada de vino tinto y limoncino" width="400" height="260" loading="lazy">
         </div>
         <div class="dish-body">
           <h3>Plato Fuerte con Vegetales</h3>
@@ -463,7 +523,7 @@ img{max-width:100%;display:block}
       </div>
       <div class="dish-card fade-up" style="transition-delay:.5s">
         <div class="dish-img">
-          <img src="img/lbp/cream-ravioli.jpg" alt="Ravioli en salsa cremosa de chammpinones con ensalada fresca y cocktail" loading="lazy">
+          <img src="img/lbp/cream-ravioli.jpg" alt="Ravioli en salsa cremosa de champinones con ensalada fresca y cocktail" width="400" height="260" loading="lazy">
         </div>
         <div class="dish-body">
           <h3>Ravioli en Salsa Cremosa</h3>
@@ -472,7 +532,7 @@ img{max-width:100%;display:block}
       </div>
       <div class="dish-card fade-up" style="transition-delay:.6s">
         <div class="dish-img">
-          <img src="img/lbp/panna-cotta.jpg" alt="Panna cotta con coulis de frutos rojos y decoracion de caramelo artesanal" loading="lazy">
+          <img src="img/lbp/panna-cotta.jpg" alt="Panna cotta con coulis de frutos rojos y decoracion de caramelo artesanal" width="400" height="260" loading="lazy">
         </div>
         <div class="dish-body">
           <h3>Panna Cotta</h3>
@@ -485,10 +545,10 @@ img{max-width:100%;display:block}
 
 <!-- Photo Gallery Strip -->
 <div class="gallery-strip" aria-label="Galeria de fotos del restaurante">
-  <img src="img/lbp/event-full-house.jpg" alt="Noche de evento con musica en vivo y restaurante lleno en La Buona Pasta" loading="lazy">
-  <img src="img/lbp/espresso-limoncino.jpg" alt="Espresso y limoncino Bottega en mesa con mantel de La Buona Pasta" loading="lazy">
-  <img src="img/lbp/family-dining.jpg" alt="Padre e hijo disfrutando pasta de camarones en La Buona Pasta" loading="lazy">
-  <img src="img/lbp/wine-pouring.jpg" alt="Sirviendo vino blanco con letrero dorado de La Buona Pasta y bodega de vinos" loading="lazy">
+  <img src="img/lbp/event-full-house.jpg" alt="Noche de evento con musica en vivo y restaurante lleno en La Buona Pasta" width="400" height="240" loading="lazy">
+  <img src="img/lbp/espresso-limoncino.jpg" alt="Espresso y limoncino Bottega en mesa con mantel de La Buona Pasta" width="400" height="240" loading="lazy">
+  <img src="img/lbp/family-dining.jpg" alt="Padre e hijo disfrutando pasta de camarones en La Buona Pasta" width="400" height="240" loading="lazy">
+  <img src="img/lbp/wine-pouring.jpg" alt="Sirviendo vino blanco con letrero dorado de La Buona Pasta y bodega de vinos" width="400" height="240" loading="lazy">
 </div>
 
 <!-- Ambiente (Atmosphere) -->
