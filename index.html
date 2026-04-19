@@ -8,9 +8,11 @@
 <meta property="og:title" content="La Buona Pasta | Restaurante Italiano en Loja, Ecuador">
 <meta property="og:description" content="Pasta artesanal y cocina italiana con el sabor de casa. Desde 2018 en el corazón de Loja.">
 <meta property="og:type" content="restaurant">
-<meta property="og:image" content="img/lbp/hero-table-spread.jpg">
+<meta property="og:image" content="https://estebandchi.github.io/la-buona-pasta/img/lbp/hero-table-spread.jpg">
+<meta property="og:url" content="https://estebandchi.github.io/la-buona-pasta/">
 <meta property="og:locale" content="es_EC">
 <meta property="og:site_name" content="La Buona Pasta">
+<link rel="canonical" href="https://estebandchi.github.io/la-buona-pasta/">
 <title>La Buona Pasta | Restaurante Italiano en Loja, Ecuador</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,13 +22,17 @@
   "@context": "https://schema.org",
   "@type": "Restaurant",
   "name": "La Buona Pasta",
-  "description": "Pasta artesanal y cocina italiana con el sabor de casa. Desde 2018 en Loja, Ecuador.",
-  "image": "img/lbp/hero-table-spread.jpg",
+  "url": "https://estebandchi.github.io/la-buona-pasta/",
+  "description": "Restaurante de pasta artesanal y cocina italiana en Loja, Ecuador. Pasta fresca hecha en casa, pizza artesanal, postres italianos y bebidas. Servicio de comedor, para llevar y delivery. Abierto desde 2018.",
+  "image": "https://estebandchi.github.io/la-buona-pasta/img/lbp/hero-table-spread.jpg",
+  "logo": "https://estebandchi.github.io/la-buona-pasta/img/lbp/logo.png",
+  "foundingDate": "2018",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "José Antonio Eguiguren y Juan José Peña",
     "addressLocality": "Loja",
     "addressRegion": "Loja",
+    "postalCode": "110150",
     "addressCountry": "EC"
   },
   "geo": {
@@ -34,9 +40,14 @@
     "latitude": -3.9931,
     "longitude": -79.2042
   },
+  "areaServed": {
+    "@type": "City",
+    "name": "Loja",
+    "containedInPlace": {"@type": "Country", "name": "Ecuador"}
+  },
   "telephone": "+593994697251",
   "email": "buonapastaloja@gmail.com",
-  "servesCuisine": "Italian",
+  "servesCuisine": ["Italian", "Pasta", "Pizza"],
   "priceRange": "$$",
   "openingHoursSpecification": [
     {
@@ -50,18 +61,178 @@
     "@type": "Menu",
     "name": "Menú Principal",
     "hasMenuSection": [
-      {"@type": "MenuSection", "name": "Pastas"},
-      {"@type": "MenuSection", "name": "Pizzas"},
-      {"@type": "MenuSection", "name": "Entradas y Ensaladas"},
-      {"@type": "MenuSection", "name": "Crepes"},
-      {"@type": "MenuSection", "name": "Sopas"},
-      {"@type": "MenuSection", "name": "Postres"},
-      {"@type": "MenuSection", "name": "Bebidas"}
+      {
+        "@type": "MenuSection",
+        "name": "Entradas y Ensaladas",
+        "hasMenuItem": [
+          {"@type": "MenuItem", "name": "Sandwich Italiano", "offers": {"@type": "Offer", "price": "7.60", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Sandwich Vegetariano", "offers": {"@type": "Offer", "price": "6.90", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Sandwich de Pollo", "offers": {"@type": "Offer", "price": "7.40", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Ensalada de la Casa", "offers": {"@type": "Offer", "price": "10.50", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Ensalada Italiana", "offers": {"@type": "Offer", "price": "7.50", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Ensalada Mediterránea", "offers": {"@type": "Offer", "price": "9.50", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Ensalada de Frutas", "offers": {"@type": "Offer", "price": "4.90", "priceCurrency": "USD"}}
+        ]
+      },
+      {
+        "@type": "MenuSection",
+        "name": "Crepes y Picadas",
+        "hasMenuItem": [
+          {"@type": "MenuItem", "name": "Crepe de Pollo", "offers": {"@type": "Offer", "price": "7.50", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Crepe de Frutas", "offers": {"@type": "Offer", "price": "7.50", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Picada La Buona Pasta", "offers": {"@type": "Offer", "price": "14.50", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Picada de Quesos", "offers": {"@type": "Offer", "price": "6.10", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Picada de Carnes", "offers": {"@type": "Offer", "price": "14.50", "priceCurrency": "USD"}}
+        ]
+      },
+      {
+        "@type": "MenuSection",
+        "name": "Sopas",
+        "hasMenuItem": [
+          {"@type": "MenuItem", "name": "Minestrone", "offers": {"@type": "Offer", "price": "6.80", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Sopa de Pollo", "offers": {"@type": "Offer", "price": "7.10", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Crema de Pomodoro", "offers": {"@type": "Offer", "price": "8.90", "priceCurrency": "USD"}}
+        ]
+      },
+      {
+        "@type": "MenuSection",
+        "name": "Bebidas",
+        "hasMenuItem": [
+          {"@type": "MenuItem", "name": "Espresso", "offers": {"@type": "Offer", "price": "2.50", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Cappuccino", "offers": {"@type": "Offer", "price": "4.20", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Chocolate de la Nonna", "offers": {"@type": "Offer", "price": "4.40", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Horchata de la Casa", "offers": {"@type": "Offer", "price": "2.60", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Jugo de Fruta", "offers": {"@type": "Offer", "price": "3.60", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Copa Vino de la Casa", "offers": {"@type": "Offer", "price": "5.60", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Cerveza (Corona, Stella, Heineken)", "offers": {"@type": "Offer", "price": "5.60", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Sambuca Espresso", "offers": {"@type": "Offer", "price": "3.10", "priceCurrency": "USD"}}
+        ]
+      },
+      {"@type": "MenuSection", "name": "Pastas", "description": "Pasta fresca hecha en casa con salsas del día. Menú completo disponible por WhatsApp."},
+      {"@type": "MenuSection", "name": "Pizzas", "description": "Pizza artesanal horneada al momento. Menú completo disponible por WhatsApp."},
+      {"@type": "MenuSection", "name": "Postres", "description": "Panna cotta, tiramisú y dulces clásicos italianos."}
     ]
   },
   "acceptsReservations": "true",
   "currenciesAccepted": "USD",
-  "paymentAccepted": "Cash, Credit Card"
+  "paymentAccepted": "Cash, Credit Card",
+  "amenityFeature": [
+    {"@type": "LocationFeatureSpecification", "name": "Dine-in", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Takeout", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Delivery", "value": true}
+  ],
+  "keywords": "restaurante italiano Loja, pasta artesanal Ecuador, pizza Loja, comida italiana Loja, La Buona Pasta"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Dónde queda La Buona Pasta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La Buona Pasta está ubicada en José Antonio Eguiguren y Juan José Peña, en el centro de Loja, Ecuador. Puedes encontrarnos fácilmente en Google Maps buscando 'La Buona Pasta Loja'."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuál es el horario de La Buona Pasta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Abrimos de lunes a sábado de 12:00 PM a 10:00 PM (mediodía a 22:00). Los domingos permanecemos cerrados."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué tipo de comida sirven en La Buona Pasta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Servimos cocina italiana auténtica con pasta fresca hecha en casa todos los días, pizza artesanal, ensaladas, crepes, sopas como minestrone, y postres italianos como panna cotta y tiramisú. También ofrecemos bebidas que incluyen café espresso, cappuccino, vinos, cervezas importadas y la tradicional horchata lojana."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuáles son los platos más populares de La Buona Pasta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Los favoritos de nuestros clientes son la Pasta Bolognese (pappardelle fresca con salsa casera), el Fettuccine con Camarones en salsa cremosa, la Pizza Artesanal horneada al momento, el Ravioli en Salsa Cremosa de champiñones, y de postre la Panna Cotta con coulis de frutos rojos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿La Buona Pasta hace delivery o para llevar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, ofrecemos tres modalidades de servicio: comer en el restaurante (dine-in), para llevar (takeout) y delivery. Puedes hacer tu pedido llamando al +593 99 469 7251 o escribiendo por WhatsApp al mismo número."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo puedo reservar mesa en La Buona Pasta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Puedes reservar mesa llamando al +593 99 469 7251 o enviando un mensaje de WhatsApp. También puedes escribirnos al correo buonapastaloja@gmail.com. Aceptamos reservas para familias, parejas y grupos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué formas de pago aceptan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aceptamos efectivo (dólares americanos, la moneda oficial de Ecuador) y tarjetas de crédito."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿La Buona Pasta es apta para familias con niños?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, La Buona Pasta es un restaurante familiar. Tenemos un ambiente cálido y acogedor, ideal para familias con niños. Nuestras porciones son generosas y ofrecemos opciones que gustan a toda la familia como pastas, pizzas y postres."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Desde cuándo existe La Buona Pasta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La Buona Pasta abrió sus puertas en 2018 en Loja, Ecuador. Lo que empezó como una pasión familiar por la pasta artesanal se convirtió en un restaurante que es parte de la comunidad lojana desde hace más de 7 años."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuál es el rango de precios en La Buona Pasta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Los precios son accesibles. Las entradas y ensaladas van desde $4.90 hasta $10.50, los crepes cuestan $7.50, las sopas entre $6.80 y $8.90, y las bebidas desde $2.50 (espresso) hasta $5.60 (cerveza importada o vino). El menú completo de pastas y pizzas está disponible por WhatsApp."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "La Buona Pasta",
+  "url": "https://estebandchi.github.io/la-buona-pasta/",
+  "logo": "https://estebandchi.github.io/la-buona-pasta/img/lbp/logo.png",
+  "foundingDate": "2018",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+593994697251",
+    "contactType": "reservations",
+    "availableLanguage": ["Spanish", "English"]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "José Antonio Eguiguren y Juan José Peña",
+    "addressLocality": "Loja",
+    "addressRegion": "Loja",
+    "addressCountry": "EC"
+  }
 }
 </script>
 <style>
