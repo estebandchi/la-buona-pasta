@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Buona Pasta — Plan de Crecimiento Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --dark:#1a1612;--dark-2:#231f1a;--dark-3:#2c2720;
+  --cream:#faf6f0;--linen:#f0ebe2;--warm-white:#fdfbf7;
+  --text-dark:#2c2420;--text-dark-2:#5a4e44;
+  --text-light:#f0eae0;--text-light-2:#c8bba8;
+  --brand-red:#c93c2f;--brand-red-dark:#a83226;
+  --brand-gold:#e8b84a;--brand-gold-light:#f0c85e;
+  --olive:#5a7247;
+  --font-heading:'Playfair Display',Georgia,serif;
+  --font-body:'Source Sans 3',-apple-system,sans-serif;
+}
+html,body{height:100%;overflow:hidden;background:var(--dark);color:var(--text-light);font-family:var(--font-body)}
+h1,h2,h3,h4{font-family:var(--font-heading);font-weight:700;line-height:1.2}
+
+/* Slides Container */
+.deck{height:100vh;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 32px;opacity:0;transform:translateX(60px);transition:opacity .5s ease,transform .5s ease;pointer-events:none;overflow-y:auto}
+.slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+.slide.prev{opacity:0;transform:translateX(-60px)}
+
+/* Navigation */
+.nav-arrows{position:fixed;top:50%;z-index:50;transform:translateY(-50%)}
+.nav-arrows.left{left:16px}
+.nav-arrows.right{right:16px}
+.nav-arrow{width:48px;height:48px;border-radius:50%;border:2px solid rgba(232,184,74,.25);background:rgba(26,22,18,.7);backdrop-filter:blur(8px);color:var(--brand-gold);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease;font-size:20px}
+.nav-arrow:hover{background:rgba(232,184,74,.15);border-color:var(--brand-gold)}
+.nav-arrow:disabled{opacity:.2;cursor:default;pointer-events:none}
+
+/* Progress */
+.progress{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:8px;align-items:center}
+.dot{width:10px;height:10px;border-radius:50%;background:rgba(237,230,218,.15);transition:all .3s ease;cursor:pointer}
+.dot.active{background:var(--brand-gold);width:28px;border-radius:5px}
+.slide-counter{position:fixed;top:20px;right:24px;z-index:50;font-size:14px;color:var(--text-light-2);font-weight:600;opacity:.6}
+
+/* Shared Slide Styles */
+.slide-inner{max-width:900px;width:100%;text-align:center}
+.slide-label{display:inline-block;font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--brand-gold);margin-bottom:16px}
+.slide-title{font-size:clamp(36px,6vw,56px);color:var(--text-light);margin-bottom:20px;letter-spacing:.5px}
+.slide-title em{font-style:italic;color:var(--brand-gold)}
+.slide-subtitle{font-size:clamp(16px,2.5vw,20px);color:var(--text-light-2);line-height:1.6;max-width:650px;margin:0 auto 32px}
+
+/* Cover Slide */
+.cover-logo{width:120px;height:120px;border-radius:50%;margin:0 auto 28px;box-shadow:0 4px 24px rgba(0,0,0,.4),0 0 60px rgba(0,0,0,.2)}
+.cover-brand{font-size:12px;color:var(--text-light-2);letter-spacing:3px;text-transform:uppercase;margin-top:40px;opacity:.5}
+.cover-brand span{color:var(--brand-gold);opacity:1}
+
+/* Stat Cards */
+.stat-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:24px 0}
+.stat-card{background:var(--dark-2);border:1px solid rgba(237,230,218,.08);border-radius:16px;padding:28px 24px;min-width:140px;flex:1;max-width:200px}
+.stat-num{font-family:var(--font-heading);font-size:42px;font-weight:800;color:var(--brand-gold);line-height:1}
+.stat-num.red{color:var(--brand-red)}
+.stat-num.green{color:var(--olive)}
+.stat-label{font-size:13px;color:var(--text-light-2);margin-top:8px;line-height:1.4}
+
+/* Phase Cards */
+.phase-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:32px 0;text-align:left}
+.phase-card{background:var(--dark-2);border:1px solid rgba(237,230,218,.08);border-radius:16px;padding:28px 24px;flex:1;min-width:220px;max-width:280px;position:relative}
+.phase-card.done{border-color:rgba(90,114,71,.4)}
+.phase-card.next{border-color:rgba(232,184,74,.3)}
+.phase-card.future{border-color:rgba(237,230,218,.06);opacity:.7}
+.phase-num{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.phase-card.done .phase-num{color:var(--olive)}
+.phase-card.next .phase-num{color:var(--brand-gold)}
+.phase-card.future .phase-num{color:var(--text-light-2)}
+.phase-card h3{font-size:20px;margin-bottom:8px;color:var(--text-light)}
+.phase-card p{font-size:14px;color:var(--text-light-2);line-height:1.5}
+.phase-badge{display:inline-block;padding:4px 12px;border-radius:50px;font-size:11px;font-weight:700;letter-spacing:1px;margin-top:12px}
+.badge-done{background:rgba(90,114,71,.15);color:var(--olive);border:1px solid rgba(90,114,71,.3)}
+.badge-next{background:rgba(232,184,74,.1);color:var(--brand-gold);border:1px solid rgba(232,184,74,.25)}
+.badge-soon{background:rgba(237,230,218,.05);color:var(--text-light-2);border:1px solid rgba(237,230,218,.1)}
+
+/* Feature List */
+.feature-list{text-align:left;max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.feature-item{display:flex;align-items:flex-start;gap:14px;padding:10px 16px;background:var(--dark-2);border-radius:12px;border:1px solid rgba(237,230,218,.06)}
+.feature-check{width:24px;height:24px;border-radius:50%;background:rgba(90,114,71,.2);color:var(--olive);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;font-weight:700}
+.feature-item p{font-size:15px;color:var(--text-light);line-height:1.4}
+.feature-item span{font-size:13px;color:var(--text-light-2)}
+
+/* Score Display */
+.score-row{display:flex;gap:32px;justify-content:center;margin:28px 0}
+.score-ring{position:relative;width:120px;height:120px}
+.score-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.score-ring circle{fill:none;stroke-width:8}
+.score-ring .bg{stroke:rgba(237,230,218,.08)}
+.score-ring .fill{stroke-linecap:round;transition:stroke-dashoffset 1s ease}
+.score-ring .fill.gold{stroke:var(--brand-gold)}
+.score-ring .fill.red{stroke:var(--brand-red)}
+.score-value{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-value .num{font-family:var(--font-heading);font-size:32px;font-weight:800;color:var(--text-light)}
+.score-value .lbl{font-size:11px;color:var(--text-light-2);letter-spacing:1px;text-transform:uppercase}
+
+/* GBP Mockup */
+.gbp-mock{background:var(--warm-white);border-radius:16px;padding:24px;max-width:400px;margin:24px auto;text-align:left;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.gbp-mock h4{font-family:var(--font-body);font-size:18px;font-weight:700;color:var(--text-dark);margin-bottom:4px}
+.gbp-mock .gbp-rating{color:var(--brand-gold);font-size:14px;margin-bottom:8px}
+.gbp-mock .gbp-info{font-size:13px;color:var(--text-dark-2);line-height:1.8}
+.gbp-mock .gbp-info span{display:block}
+.gbp-mock .gbp-actions{display:flex;gap:8px;margin-top:12px}
+.gbp-mock .gbp-btn{padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600}
+.gbp-blue{background:#1a73e8;color:#fff}
+.gbp-outline{background:transparent;border:1px solid #dadce0;color:#1a73e8}
+
+/* Cost Slide */
+.cost-zero{font-family:var(--font-heading);font-size:clamp(80px,15vw,160px);font-weight:800;color:var(--brand-gold);line-height:1;margin:16px 0}
+.cost-grid{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:24px 0}
+.cost-item{background:var(--dark-2);border:1px solid rgba(237,230,218,.06);border-radius:12px;padding:16px 20px;min-width:180px;text-align:center}
+.cost-item .cost-name{font-size:14px;color:var(--text-light);font-weight:600;margin-bottom:4px}
+.cost-item .cost-price{font-family:var(--font-heading);font-size:24px;font-weight:700;color:var(--olive)}
+.cost-note{font-size:14px;color:var(--text-light-2);margin-top:20px;font-style:italic}
+
+/* Timeline */
+.timeline{text-align:left;max-width:560px;margin:28px auto;position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:10px;top:8px;bottom:8px;width:3px;background:rgba(237,230,218,.1);border-radius:2px}
+.tl-item{position:relative;margin-bottom:28px}
+.tl-item::before{content:'';position:absolute;left:-26px;top:6px;width:14px;height:14px;border-radius:50%;border:3px solid var(--dark);z-index:1}
+.tl-item.done::before{background:var(--olive)}
+.tl-item.active::before{background:var(--brand-gold);box-shadow:0 0 12px rgba(232,184,74,.4)}
+.tl-item.future::before{background:var(--dark-3);border-color:var(--text-light-2)}
+.tl-time{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.tl-item.done .tl-time{color:var(--olive)}
+.tl-item.active .tl-time{color:var(--brand-gold)}
+.tl-item.future .tl-time{color:var(--text-light-2)}
+.tl-desc{font-size:16px;color:var(--text-light);font-weight:600}
+.tl-sub{font-size:13px;color:var(--text-light-2);margin-top:2px}
+
+/* Checklist */
+.checklist{text-align:left;max-width:560px;margin:24px auto;display:flex;flex-direction:column;gap:14px}
+.check-item{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;background:var(--dark-2);border-radius:12px;border:1px solid rgba(237,230,218,.06)}
+.check-icon{font-size:22px;flex-shrink:0;line-height:1}
+.check-item h4{font-family:var(--font-body);font-size:15px;font-weight:700;color:var(--text-light);margin-bottom:2px}
+.check-item p{font-size:13px;color:var(--text-light-2);line-height:1.4}
+
+/* Social icons row */
+.social-types{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:24px 0}
+.social-type{background:var(--dark-2);border:1px solid rgba(237,230,218,.08);border-radius:12px;padding:20px;width:120px;text-align:center}
+.social-type .icon{font-size:28px;margin-bottom:8px}
+.social-type p{font-size:12px;color:var(--text-light-2);line-height:1.3}
+
+/* CTA final */
+.final-url{display:inline-block;padding:12px 28px;background:rgba(232,184,74,.1);border:1px solid rgba(232,184,74,.25);border-radius:50px;font-size:15px;font-weight:600;color:var(--brand-gold);margin:8px 0;letter-spacing:.5px}
+.final-wa{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--brand-red);border-radius:50px;font-size:16px;font-weight:700;color:#fff;margin-top:12px;text-decoration:none;transition:all .3s ease}
+.final-wa:hover{background:var(--brand-red-dark);transform:translateY(-2px)}
+
+/* Responsive */
+@media(max-width:768px){
+  .slide{padding:32px 20px}
+  .nav-arrows{display:none}
+  .phase-row{flex-direction:column;align-items:center}
+  .phase-card{max-width:100%;min-width:0}
+  .stat-row{gap:12px}
+  .stat-card{min-width:0;padding:20px 16px}
+  .stat-num{font-size:32px}
+  .score-row{gap:20px}
+  .score-ring{width:100px;height:100px}
+  .score-value .num{font-size:26px}
+  .cost-grid{flex-direction:column;align-items:center}
+  .cost-item{width:100%;max-width:280px}
+  .social-types{gap:10px}
+  .social-type{width:100px;padding:14px}
+  .gbp-mock{max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- SLIDE 1: Cover -->
+<div class="slide active" data-slide="0">
+  <div class="slide-inner">
+    <img src="img/lbp/logo.png" alt="La Buona Pasta" class="cover-logo" width="120" height="120">
+    <h1 class="slide-title">Plan de Crecimiento <em>Digital</em></h1>
+    <p class="slide-subtitle">Cómo vamos a hacer que La Buona Pasta sea visible para todo Loja desde el celular.</p>
+    <div class="cover-brand">Preparado por <span>Signal & Scale</span></div>
+  </div>
+</div>
+
+<!-- SLIDE 2: El Problema -->
+<div class="slide" data-slide="1">
+  <div class="slide-inner">
+    <span class="slide-label">El Problema</span>
+    <h2 class="slide-title">La Buona Pasta es <em>invisible</em> en internet</h2>
+    <p class="slide-subtitle">Cuando alguien busca "restaurante italiano en Loja" en Google, en Maps, o le pregunta a un asistente de IA — La Buona Pasta no aparece.</p>
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num">80%</div>
+        <div class="stat-label">de las búsquedas de restaurantes son desde el celular</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num red">0</div>
+        <div class="stat-label">presencia actual en Google Maps y búsquedas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">8/10</div>
+        <div class="stat-label">clientes potenciales nunca sabrán que existimos</div>
+      </div>
+    </div>
+    <p class="slide-subtitle" style="margin-top:16px;font-size:15px;font-style:italic">La buena noticia: esto tiene solución, y no cuesta nada.</p>
+  </div>
+</div>
+
+<!-- SLIDE 3: La Solución -->
+<div class="slide" data-slide="2">
+  <div class="slide-inner">
+    <span class="slide-label">La Solución</span>
+    <h2 class="slide-title">Un plan en <em>3 fases</em></h2>
+    <p class="slide-subtitle">Paso a paso, vamos a construir la presencia digital de La Buona Pasta.</p>
+    <div class="phase-row">
+      <div class="phase-card done">
+        <div class="phase-num">Fase 1</div>
+        <h3>Sitio Web</h3>
+        <p>Una página profesional con menú, fotos, WhatsApp y Google Maps. Optimizada para celular y para Google.</p>
+        <span class="phase-badge badge-done">COMPLETADO</span>
+      </div>
+      <div class="phase-card next">
+        <div class="phase-num">Fase 2</div>
+        <h3>Google Business Profile</h3>
+        <p>La tarjeta que aparece cuando buscan en Google Maps. Horario, fotos, reseñas y enlace al sitio web.</p>
+        <span class="phase-badge badge-next">EN PROGRESO</span>
+      </div>
+      <div class="phase-card future">
+        <div class="phase-num">Fase 3</div>
+        <h3>Redes Sociales</h3>
+        <p>Contenido en Instagram y Facebook. Fotos de platos, eventos y el día a día del restaurante.</p>
+        <span class="phase-badge badge-soon">PRÓXIMAMENTE</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: Sitio Web -->
+<div class="slide" data-slide="3">
+  <div class="slide-inner">
+    <span class="slide-label">Fase 1 — Completado</span>
+    <h2 class="slide-title">El Sitio Web ya está <em>en vivo</em></h2>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-check">&#10003;</div>
+        <div><p>Diseño profesional optimizado para celular</p><span>Se ve perfecto en cualquier teléfono</span></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-check">&#10003;</div>
+        <div><p>WhatsApp y llamada con un solo toque</p><span>Los clientes pueden contactarnos al instante</span></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-check">&#10003;</div>
+        <div><p>Menú con precios y fotos reales</p><span>Entradas, sopas, crepes, bebidas — todo visible</span></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-check">&#10003;</div>
+        <div><p>Google Maps integrado y dirección exacta</p><span>Un toque para ver cómo llegar</span></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-check">&#10003;</div>
+        <div><p>Optimizado para Google y asistentes de IA</p><span>Cuando alguien pregunte por restaurantes en Loja, apareceremos</span></div>
+      </div>
+    </div>
+    <div style="margin-top:20px">
+      <span class="final-url">estebandchi.github.io/la-buona-pasta</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: Scores -->
+<div class="slide" data-slide="4">
+  <div class="slide-inner">
+    <span class="slide-label">Calidad del Sitio</span>
+    <h2 class="slide-title">Resultados <em>medibles</em></h2>
+    <p class="slide-subtitle">Usamos inteligencia artificial para evaluar la calidad del sitio web en las áreas que más importan para un restaurante.</p>
+    <div class="score-row">
+      <div class="score-ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="bg" cx="60" cy="60" r="52"/>
+          <circle class="fill gold" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="23"/>
+        </svg>
+        <div class="score-value"><span class="num">93</span><span class="lbl">Restaurante</span></div>
+      </div>
+      <div class="score-ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="bg" cx="60" cy="60" r="52"/>
+          <circle class="fill red" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="59"/>
+        </svg>
+        <div class="score-value"><span class="num">82</span><span class="lbl">SEO para IA</span></div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-num green">100%</div><div class="stat-label">optimizado para celular</div></div>
+      <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">preguntas frecuentes para asistentes de IA</div></div>
+      <div class="stat-card"><div class="stat-num">23</div><div class="stat-label">items del menú con precios en datos estructurados</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: Google Business Profile -->
+<div class="slide" data-slide="5">
+  <div class="slide-inner">
+    <span class="slide-label">Fase 2 — En Progreso</span>
+    <h2 class="slide-title">Google Business <em>Profile</em></h2>
+    <p class="slide-subtitle">Esto es lo que aparece cuando alguien busca en Google Maps. El 90% de los clientes descubren restaurantes aquí.</p>
+    <div class="gbp-mock">
+      <h4>La Buona Pasta</h4>
+      <div class="gbp-rating">&#9733;&#9733;&#9733;&#9733;&#9733; 4.8 (pronto)</div>
+      <div class="gbp-info">
+        <span>&#128205; José Antonio Eguiguren y Juan José Peña, Loja</span>
+        <span>&#128337; Lun-Sáb 12:00 - 22:00</span>
+        <span>&#127837; Restaurante Italiano · $$</span>
+        <span>&#128241; +593 99 469 7251</span>
+        <span>&#127760; estebandchi.github.io/la-buona-pasta</span>
+      </div>
+      <div class="gbp-actions">
+        <span class="gbp-btn gbp-blue">Llamar</span>
+        <span class="gbp-btn gbp-outline">Cómo llegar</span>
+        <span class="gbp-btn gbp-outline">Sitio web</span>
+      </div>
+    </div>
+    <p class="slide-subtitle" style="font-size:14px;margin-top:16px">Solo necesitamos verificar con una llamada al teléfono del restaurante.</p>
+  </div>
+</div>
+
+<!-- SLIDE 7: Redes Sociales -->
+<div class="slide" data-slide="6">
+  <div class="slide-inner">
+    <span class="slide-label">Fase 3 — Próximamente</span>
+    <h2 class="slide-title">Contenido y <em>Redes Sociales</em></h2>
+    <p class="slide-subtitle">No necesitamos publicar todos los días. Lo importante es calidad — fotos reales que muestren la esencia de La Buona Pasta.</p>
+    <div class="social-types">
+      <div class="social-type"><div class="icon">&#128247;</div><p>Fotos de platos del día</p></div>
+      <div class="social-type"><div class="icon">&#127859;</div><p>Detrás de cámaras en la cocina</p></div>
+      <div class="social-type"><div class="icon">&#127881;</div><p>Eventos y noches especiales</p></div>
+      <div class="social-type"><div class="icon">&#128172;</div><p>Testimonios de clientes</p></div>
+      <div class="social-type"><div class="icon">&#127909;</div><p>Videos cortos (Reels)</p></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--brand-red)">Instagram</div>
+        <div class="stat-label">Fotos y Reels — donde la gente descubre comida</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="font-size:28px;color:#1877f2">Facebook</div>
+        <div class="stat-label">Comunidad local — eventos, horarios, menú del día</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: IA -->
+<div class="slide" data-slide="7">
+  <div class="slide-inner">
+    <span class="slide-label">Lo que nos hace diferentes</span>
+    <h2 class="slide-title">Optimización con <em>Inteligencia Artificial</em></h2>
+    <p class="slide-subtitle">No solo creamos el sitio web — usamos IA para mejorarlo continuamente. Cada semana, analizamos qué funciona y qué se puede mejorar.</p>
+    <div class="phase-row" style="text-align:center">
+      <div class="phase-card" style="border-color:rgba(201,60,47,.3)">
+        <div class="phase-num" style="color:var(--brand-red)">Paso 1</div>
+        <h3>La IA propone mejoras</h3>
+        <p>Analiza el sitio y sugiere cambios en diseño, texto, o estructura para atraer más clientes.</p>
+      </div>
+      <div class="phase-card" style="border-color:rgba(232,184,74,.3)">
+        <div class="phase-num" style="color:var(--brand-gold)">Paso 2</div>
+        <h3>La IA evalúa el resultado</h3>
+        <p>Cada cambio se mide con puntuaciones objetivas. Si mejora, se queda. Si no, se revierte.</p>
+      </div>
+      <div class="phase-card" style="border-color:rgba(90,114,71,.3)">
+        <div class="phase-num" style="color:var(--olive)">Paso 3</div>
+        <h3>El sitio mejora solo</h3>
+        <p>Con el tiempo, el sitio se vuelve cada vez más efectivo para convertir visitantes en clientes.</p>
+      </div>
+    </div>
+    <p class="slide-subtitle" style="font-size:14px;font-style:italic">Un diseñador web tradicional crea el sitio y se va. Nosotros lo mejoramos cada semana.</p>
+  </div>
+</div>
+
+<!-- SLIDE 9: Costo -->
+<div class="slide" data-slide="8">
+  <div class="slide-inner">
+    <span class="slide-label">Inversión</span>
+    <h2 class="slide-title">¿Cuánto cuesta <em>todo esto</em>?</h2>
+    <div class="cost-zero">$0</div>
+    <div class="cost-grid">
+      <div class="cost-item"><div class="cost-name">Sitio Web</div><div class="cost-price">$0</div></div>
+      <div class="cost-item"><div class="cost-name">Google Business</div><div class="cost-price">$0</div></div>
+      <div class="cost-item"><div class="cost-name">Optimización IA</div><div class="cost-price">$0</div></div>
+      <div class="cost-item"><div class="cost-name">Hosting</div><div class="cost-price">$0</div></div>
+    </div>
+    <p class="cost-note">Opcional en el futuro: un dominio personalizado (labuonapasta.com) cuesta ~$12 al año.</p>
+    <p class="slide-subtitle" style="font-size:15px;margin-top:16px">Su única inversión: <strong style="color:var(--text-light)">tiempo para fotos y aprobaciones</strong>.</p>
+  </div>
+</div>
+
+<!-- SLIDE 10: Cronograma -->
+<div class="slide" data-slide="9">
+  <div class="slide-inner">
+    <span class="slide-label">Cronograma</span>
+    <h2 class="slide-title">En <em>30 días</em>, todo listo</h2>
+    <div class="timeline">
+      <div class="tl-item done">
+        <div class="tl-time">Semanas 1-2</div>
+        <div class="tl-desc">Sitio Web Profesional</div>
+        <div class="tl-sub">Diseño, menú, fotos, WhatsApp, SEO, IA — completado</div>
+      </div>
+      <div class="tl-item active">
+        <div class="tl-time">Semana 3</div>
+        <div class="tl-desc">Google Business Profile</div>
+        <div class="tl-sub">Crear perfil, subir fotos, verificar teléfono, activar</div>
+      </div>
+      <div class="tl-item future">
+        <div class="tl-time">Semana 4</div>
+        <div class="tl-desc">Redes Sociales</div>
+        <div class="tl-sub">Crear perfiles, publicar primeras fotos, enlazar todo</div>
+      </div>
+      <div class="tl-item future">
+        <div class="tl-time">Mes 2 en adelante</div>
+        <div class="tl-desc">Optimización Continua</div>
+        <div class="tl-sub">Mejorar sitio con IA, publicar contenido, medir resultados</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11: Lo que necesitamos -->
+<div class="slide" data-slide="10">
+  <div class="slide-inner">
+    <span class="slide-label">Su Parte</span>
+    <h2 class="slide-title">Lo que necesitamos <em>de ustedes</em></h2>
+    <div class="checklist">
+      <div class="check-item">
+        <div class="check-icon">&#9989;</div>
+        <div><h4>Aprobar el sitio web</h4><p>Revisar que la información, fotos y menú estén correctos</p></div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">&#128241;</div>
+        <div><h4>Verificar Google Business Profile</h4><p>Google llamará al teléfono del restaurante con un código — solo contestar</p></div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">&#128247;</div>
+        <div><h4>Seguir tomando fotos</h4><p>Fotos de los platos, el restaurante, eventos. Con el celular está perfecto</p></div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">&#128172;</div>
+        <div><h4>Compartir el enlace con los clientes</h4><p>Por WhatsApp, en la cuenta, en las redes — que la gente sepa que existe</p></div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon">&#9200;</div>
+        <div><h4>~30 minutos por semana</h4><p>Para revisar contenido antes de publicar. Nada más.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12: Cierre -->
+<div class="slide" data-slide="11">
+  <div class="slide-inner">
+    <img src="img/lbp/logo.png" alt="La Buona Pasta" class="cover-logo" width="120" height="120">
+    <h2 class="slide-title">La Buona Pasta merece ser <em>encontrada</em></h2>
+    <p class="slide-subtitle">Tienen la comida, el ambiente y los años de experiencia. Solo falta que el mundo lo sepa.</p>
+    <div style="margin:20px 0">
+      <span class="final-url">estebandchi.github.io/la-buona-pasta</span>
+    </div>
+    <a href="https://wa.me/593994697251" target="_blank" rel="noopener" class="final-wa">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.39-1.583l-.386-.232-2.64.885.885-2.64-.232-.386A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Empecemos
+    </a>
+    <div class="cover-brand" style="margin-top:48px">Preparado con cariño por <span>Signal & Scale</span></div>
+  </div>
+</div>
+
+</div>
+
+<!-- Navigation Arrows -->
+<button class="nav-arrows left" onclick="prev()" aria-label="Anterior">
+  <div class="nav-arrow" id="btn-prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></div>
+</button>
+<button class="nav-arrows right" onclick="next()" aria-label="Siguiente">
+  <div class="nav-arrow" id="btn-next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></div>
+</button>
+
+<!-- Progress Dots -->
+<div class="progress" id="progress"></div>
+<div class="slide-counter" id="counter"></div>
+
+<script>
+(function(){
+  var slides=document.querySelectorAll('.slide');
+  var total=slides.length;
+  var current=0;
+  var progress=document.getElementById('progress');
+  var counter=document.getElementById('counter');
+  var btnPrev=document.getElementById('btn-prev');
+  var btnNext=document.getElementById('btn-next');
+
+  for(var i=0;i<total;i++){
+    var d=document.createElement('div');
+    d.className='dot'+(i===0?' active':'');
+    d.dataset.i=i;
+    d.onclick=function(){goTo(+this.dataset.i)};
+    progress.appendChild(d);
+  }
+
+  function update(){
+    slides.forEach(function(s,i){
+      s.className='slide'+(i===current?' active':i<current?' prev':'');
+    });
+    var dots=progress.querySelectorAll('.dot');
+    dots.forEach(function(d,i){d.className='dot'+(i===current?' active':'')});
+    counter.textContent=(current+1)+' / '+total;
+    btnPrev.parentElement.style.opacity=current===0?'0':'1';
+    btnPrev.parentElement.style.pointerEvents=current===0?'none':'auto';
+    btnNext.parentElement.style.opacity=current===total-1?'0':'1';
+    btnNext.parentElement.style.pointerEvents=current===total-1?'none':'auto';
+  }
+
+  function goTo(n){if(n>=0&&n<total){current=n;update()}}
+  window.next=function(){goTo(current+1)};
+  window.prev=function(){goTo(current-1)};
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' ')next();
+    else if(e.key==='ArrowLeft')prev();
+  });
+
+  var tx=0;
+  document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+  document.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)>50){dx<0?next():prev()}
+  },{passive:true});
+
+  update();
+})();
+</script>
+</body>
+</html>
