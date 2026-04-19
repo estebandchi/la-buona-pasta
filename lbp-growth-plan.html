@@ -170,6 +170,23 @@ h1,h2,h3,h4{font-family:var(--font-heading);font-weight:700;line-height:1.2}
   .social-type{width:100px;padding:14px}
   .gbp-mock{max-width:100%}
 }
+
+/* Ranking cards */
+.rank-grid{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:28px 0;text-align:left}
+.rank-card{background:var(--dark-2);border:1px solid rgba(237,230,218,.08);border-radius:16px;padding:20px;flex:1;min-width:200px;max-width:260px}
+.rank-platform{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.rank-platform .plat-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.rank-pos{font-family:var(--font-heading);font-size:48px;font-weight:800;line-height:1}
+.rank-pos.gold{color:var(--brand-gold)}
+.rank-pos.green{color:var(--olive)}
+.rank-detail{font-size:13px;color:var(--text-light-2);margin-top:6px;line-height:1.4}
+.rank-detail strong{color:var(--text-light);font-weight:600}
+.rank-quote{font-size:14px;color:var(--text-light-2);font-style:italic;line-height:1.5;max-width:650px;margin:0 auto;padding:16px 24px;border-left:3px solid var(--brand-gold);background:rgba(232,184,74,.04);border-radius:0 8px 8px 0;text-align:left}
+.rank-quote strong{color:var(--brand-gold);font-style:normal}
+@media(max-width:768px){
+  .rank-grid{flex-direction:column;align-items:center}
+  .rank-card{max-width:100%;min-width:0}
+}
 </style>
 </head>
 <body>
@@ -181,32 +198,66 @@ h1,h2,h3,h4{font-family:var(--font-heading);font-weight:700;line-height:1.2}
   <div class="slide-inner">
     <img src="img/lbp/logo.png" alt="La Buona Pasta" class="cover-logo" width="120" height="120">
     <h1 class="slide-title">Plan de Crecimiento <em>Digital</em></h1>
-    <p class="slide-subtitle">Cómo vamos a hacer que La Buona Pasta sea visible para todo Loja desde el celular.</p>
+    <p class="slide-subtitle">Cómo vamos a convertir a La Buona Pasta en el restaurante italiano #1 de Loja — en Google, en IA, y en redes sociales.</p>
     <div class="cover-brand">Preparado por <span>Signal & Scale</span></div>
   </div>
 </div>
 
-<!-- SLIDE 2: El Problema -->
+<!-- SLIDE 2: La Oportunidad -->
 <div class="slide" data-slide="1">
   <div class="slide-inner">
-    <span class="slide-label">El Problema</span>
-    <h2 class="slide-title">La Buona Pasta es <em>invisible</em> en internet</h2>
-    <p class="slide-subtitle">Cuando alguien busca "restaurante italiano en Loja" en Google, en Maps, o le pregunta a un asistente de IA — La Buona Pasta no aparece.</p>
+    <span class="slide-label">La Oportunidad</span>
+    <h2 class="slide-title">La gente ya los busca — <em>y los encuentra</em></h2>
+    <p class="slide-subtitle">La Buona Pasta ya tiene presencia orgánica en Google. Pero sin un sitio web profesional, no podíamos controlar qué ven los clientes ni cómo nos recomiendan los asistentes de IA.</p>
     <div class="stat-row">
       <div class="stat-card">
-        <div class="stat-num">80%</div>
-        <div class="stat-label">de las búsquedas de restaurantes son desde el celular</div>
+        <div class="stat-num gold">4.7</div>
+        <div class="stat-label">estrellas en Google Maps</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num red">0</div>
-        <div class="stat-label">presencia actual en Google Maps y búsquedas</div>
+        <div class="stat-num">552</div>
+        <div class="stat-label">reseñas de clientes</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num">8/10</div>
-        <div class="stat-label">clientes potenciales nunca sabrán que existimos</div>
+        <div class="stat-num green">#1</div>
+        <div class="stat-label">en Google Maps para "restaurante italiano en Loja"</div>
       </div>
     </div>
-    <p class="slide-subtitle" style="margin-top:16px;font-size:15px;font-style:italic">La buena noticia: esto tiene solución, y no cuesta nada.</p>
+    <p class="slide-subtitle" style="margin-top:16px;font-size:15px;font-style:italic">La base es fuerte. Ahora vamos a potenciarla con tecnología.</p>
+  </div>
+</div>
+
+<!-- SLIDE 2b: Competitive Landscape -->
+<div class="slide" data-slide="1b">
+  <div class="slide-inner">
+    <span class="slide-label">Resultados Reales — Abril 2026</span>
+    <h2 class="slide-title">¿Qué pasa cuando buscan <em>"restaurante italiano en Loja"</em>?</h2>
+    <p class="slide-subtitle">Probamos en Google, ChatGPT y Perplexity. Esto es lo que encontramos:</p>
+    <div class="rank-grid">
+      <div class="rank-card">
+        <div class="rank-platform"><span class="plat-dot" style="background:#4285f4"></span> Google Maps</div>
+        <div class="rank-pos gold">#1</div>
+        <div class="rank-detail"><strong>La Buona Pasta</strong><br>4.7&#9733; · 552 reseñas · $10-15<br>Por encima de Roma Pizzería (352) y Mammá Silvia (59)</div>
+      </div>
+      <div class="rank-card">
+        <div class="rank-platform"><span class="plat-dot" style="background:#10a37f"></span> ChatGPT</div>
+        <div class="rank-pos gold">#1</div>
+        <div class="rank-detail"><strong>Recomendación directa para pasta</strong><br>"Si quieres pasta y ambiente de restaurante, ve a <strong>La Buona Pasta</strong>"</div>
+      </div>
+      <div class="rank-card">
+        <div class="rank-platform"><span class="plat-dot" style="background:#20808d"></span> Perplexity</div>
+        <div class="rank-pos green">#3</div>
+        <div class="rank-detail">Después de Pizza Colibrì (5.0) y Mondragone (4.8)<br><strong>Aparece entre los mejores italianos</strong></div>
+      </div>
+      <div class="rank-card">
+        <div class="rank-platform"><span class="plat-dot" style="background:#00af87"></span> Tripadvisor</div>
+        <div class="rank-pos green">#3</div>
+        <div class="rank-detail"><strong>4.8 estrellas</strong><br>1. Pizza Colibrì · 2. Mondragone · 3. La Buona Pasta</div>
+      </div>
+    </div>
+    <div class="rank-quote">
+      <strong>ChatGPT dijo:</strong> "La Buona Pasta destaca por su enfoque en pasta hecha en casa y tiene presencia activa con horarios y datos de contacto publicados."
+    </div>
   </div>
 </div>
 
@@ -215,7 +266,7 @@ h1,h2,h3,h4{font-family:var(--font-heading);font-weight:700;line-height:1.2}
   <div class="slide-inner">
     <span class="slide-label">La Solución</span>
     <h2 class="slide-title">Un plan en <em>3 fases</em></h2>
-    <p class="slide-subtitle">Paso a paso, vamos a construir la presencia digital de La Buona Pasta.</p>
+    <p class="slide-subtitle">La base ya es fuerte. Ahora vamos a optimizar cada canal para dominar.</p>
     <div class="phase-row">
       <div class="phase-card done">
         <div class="phase-num">Fase 1</div>
@@ -226,7 +277,7 @@ h1,h2,h3,h4{font-family:var(--font-heading);font-weight:700;line-height:1.2}
       <div class="phase-card next">
         <div class="phase-num">Fase 2</div>
         <h3>Google Business Profile</h3>
-        <p>La tarjeta que aparece cuando buscan en Google Maps. Horario, fotos, reseñas y enlace al sitio web.</p>
+        <p>Ya tienen 4.7&#9733; y 552 reseñas. Ahora: agregar sitio web, fotos y responder reseñas.</p>
         <span class="phase-badge badge-next">EN PROGRESO</span>
       </div>
       <div class="phase-card future">
@@ -305,16 +356,16 @@ h1,h2,h3,h4{font-family:var(--font-heading);font-weight:700;line-height:1.2}
 <!-- SLIDE 6: Google Business Profile -->
 <div class="slide" data-slide="5">
   <div class="slide-inner">
-    <span class="slide-label">Fase 2 — En Progreso</span>
-    <h2 class="slide-title">Google Business <em>Profile</em></h2>
-    <p class="slide-subtitle">Esto es lo que aparece cuando alguien busca en Google Maps. El 90% de los clientes descubren restaurantes aquí.</p>
+    <span class="slide-label">Fase 2 — Optimizar</span>
+    <h2 class="slide-title">Potenciar el <em>Google Business Profile</em></h2>
+    <p class="slide-subtitle">Ya tienen un perfil con 4.7 estrellas y 552 reseñas — eso es oro. Ahora vamos a agregar el sitio web, fotos profesionales y menú para que los clientes tengan toda la información.</p>
     <div class="gbp-mock">
       <h4>La Buona Pasta</h4>
-      <div class="gbp-rating">&#9733;&#9733;&#9733;&#9733;&#9733; 4.8 (pronto)</div>
+      <div class="gbp-rating">&#9733;&#9733;&#9733;&#9733;&#9734; 4.7 (552 reseñas)</div>
       <div class="gbp-info">
         <span>&#128205; José Antonio Eguiguren y Juan José Peña, Loja</span>
         <span>&#128337; Lun-Sáb 12:00 - 22:00</span>
-        <span>&#127837; Restaurante Italiano · $$</span>
+        <span>&#127837; Restaurante Italiano · $10-15</span>
         <span>&#128241; +593 99 469 7251</span>
         <span>&#127760; estebandchi.github.io/la-buona-pasta</span>
       </div>
@@ -324,7 +375,20 @@ h1,h2,h3,h4{font-family:var(--font-heading);font-weight:700;line-height:1.2}
         <span class="gbp-btn gbp-outline">Sitio web</span>
       </div>
     </div>
-    <p class="slide-subtitle" style="font-size:14px;margin-top:16px">Solo necesitamos verificar con una llamada al teléfono del restaurante.</p>
+    <div class="feature-list" style="margin-top:16px">
+      <div class="feature-item">
+        <div class="feature-check" style="background:rgba(232,184,74,.15);color:var(--brand-gold)">+</div>
+        <div><p>Agregar enlace al sitio web</p><span>Los clientes podrán ver el menú completo y contactarnos</span></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-check" style="background:rgba(232,184,74,.15);color:var(--brand-gold)">+</div>
+        <div><p>Subir fotos profesionales de los platos</p><span>Las fotos venden — mejores fotos = más clientes</span></div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-check" style="background:rgba(232,184,74,.15);color:var(--brand-gold)">+</div>
+        <div><p>Responder reseñas de clientes</p><span>Demuestra que el restaurante se preocupa por cada cliente</span></div>
+      </div>
+    </div>
   </div>
 </div>
 
