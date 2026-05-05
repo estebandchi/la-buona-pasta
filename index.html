@@ -631,8 +631,10 @@ img{max-width:100%;display:block}
 .cart-service-opt{padding:12px 8px;border:1.5px solid rgba(44,36,32,.12);border-radius:var(--radius-sm);text-align:center;font-size:14px;font-weight:600;color:var(--text-dark-2);cursor:pointer;transition:var(--transition)}
 .cart-service-opt:hover{border-color:var(--brand-red);color:var(--brand-red)}
 .cart-service-opt.selected{border-color:var(--brand-red);background:rgba(201,60,47,.06);color:var(--brand-red)}
-.addr-field{display:none}
-.addr-field.visible{display:block}
+.addr-field,.time-field,.dinein-field{display:none}
+.addr-field.visible,.time-field.visible,.dinein-field.visible{display:block}
+.dinein-field label+input+label{margin-top:12px}
+.cart-fee{display:flex;justify-content:space-between;padding:6px 0;font-size:14px;color:var(--text-muted);border-top:1px solid rgba(237,230,218,.08)}
 
 @media(min-width:769px){
   .cart-modal-overlay{align-items:center;padding:24px}
@@ -1368,15 +1370,21 @@ img{max-width:100%;display:block}
         +'</div></li>';
     });
     html+='</ul>';
-    html+='<div class="cart-total"><span>Total</span><span>$'+getTotal().toFixed(2)+'</span></div>';
+    var subtotal=getTotal();
+    var fee=(selectedService==='delivery')?2:0;
+    var total=subtotal+fee;
+    if(fee>0) html+='<div class="cart-fee"><span>Envio a domicilio</span><span>+$2.00</span></div>';
+    html+='<div class="cart-total"><span>Total</span><span>$'+total.toFixed(2)+'</span></div>';
     html+='<div class="cart-form">';
     html+='<div><label>Tipo de servicio</label><div class="cart-service-options">'
-      +'<div class="cart-service-opt" onclick="selectService(this,\'delivery\')" data-svc="delivery">Delivery</div>'
-      +'<div class="cart-service-opt" onclick="selectService(this,\'pickup\')" data-svc="pickup">Para llevar</div>'
-      +'<div class="cart-service-opt selected" onclick="selectService(this,\'dinein\')" data-svc="dinein">Comer aqui</div>'
+      +'<div class="cart-service-opt'+(selectedService==='delivery'?' selected':'')+'" onclick="selectService(this,\'delivery\')" data-svc="delivery">Delivery</div>'
+      +'<div class="cart-service-opt'+(selectedService==='pickup'?' selected':'')+'" onclick="selectService(this,\'pickup\')" data-svc="pickup">Para llevar</div>'
+      +'<div class="cart-service-opt'+(selectedService==='dinein'?' selected':'')+'" onclick="selectService(this,\'dinein\')" data-svc="dinein">Comer aqui</div>'
       +'</div></div>';
     html+='<div><label>Tu nombre</label><input type="text" id="cartName" placeholder="Nombre para el pedido"></div>';
-    html+='<div class="addr-field" id="addrField"><label>Direccion de entrega</label><input type="text" id="cartAddr" placeholder="Calle y referencia"></div>';
+    html+='<div class="addr-field'+(selectedService==='delivery'?' visible':'')+'" id="addrField"><label>Direccion de entrega</label><input type="text" id="cartAddr" placeholder="Calle y referencia"></div>';
+    html+='<div class="time-field'+(selectedService==='pickup'?' visible':'')+'" id="pickupTimeField"><label>Hora de recogida</label><input type="time" id="cartPickupTime" min="12:00" max="22:00"></div>';
+    html+='<div class="dinein-field'+(selectedService==='dinein'?' visible':'')+'" id="dineinField"><label>Hora de llegada</label><input type="time" id="cartDineinTime" min="12:00" max="22:00"><label>Numero de personas</label><input type="number" id="cartPartySize" min="1" max="20" placeholder="2"></div>';
     html+='<div><label>Notas (opcional)</label><input type="text" id="cartNotes" placeholder="Sin cebolla, extra queso, etc."></div>';
     html+='<button class="cart-send-btn" onclick="sendOrder()">'
       +'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.39-1.583l-.386-.232-2.64.885.885-2.64-.232-.386A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>'
@@ -1388,12 +1396,41 @@ img{max-width:100%;display:block}
   var selectedService='dinein';
 
   window.selectService=function(el,svc){
+    saveFormState();
     selectedService=svc;
-    document.querySelectorAll('.cart-service-opt').forEach(function(o){o.classList.remove('selected');});
-    el.classList.add('selected');
-    var af=document.getElementById('addrField');
-    if(af) af.classList.toggle('visible',svc==='delivery');
+    renderCartModal();
+    restoreFormState();
   };
+
+  var formState={name:'',addr:'',notes:'',pickupTime:'',dineinTime:'',partySize:''};
+  function saveFormState(){
+    var n=document.getElementById('cartName');
+    var a=document.getElementById('cartAddr');
+    var no=document.getElementById('cartNotes');
+    var pt=document.getElementById('cartPickupTime');
+    var dt=document.getElementById('cartDineinTime');
+    var ps=document.getElementById('cartPartySize');
+    if(n) formState.name=n.value;
+    if(a) formState.addr=a.value;
+    if(no) formState.notes=no.value;
+    if(pt) formState.pickupTime=pt.value;
+    if(dt) formState.dineinTime=dt.value;
+    if(ps) formState.partySize=ps.value;
+  }
+  function restoreFormState(){
+    var n=document.getElementById('cartName');
+    var a=document.getElementById('cartAddr');
+    var no=document.getElementById('cartNotes');
+    var pt=document.getElementById('cartPickupTime');
+    var dt=document.getElementById('cartDineinTime');
+    var ps=document.getElementById('cartPartySize');
+    if(n) n.value=formState.name;
+    if(a) a.value=formState.addr;
+    if(no) no.value=formState.notes;
+    if(pt) pt.value=formState.pickupTime;
+    if(dt) dt.value=formState.dineinTime;
+    if(ps) ps.value=formState.partySize;
+  }
 
   window.cartMinus=function(idx){removeFromCart(idx);};
   window.cartPlus=function(idx){increaseItem(idx);};
@@ -1414,19 +1451,35 @@ img{max-width:100%;display:block}
     var nameInput=document.getElementById('cartName');
     var addrInput=document.getElementById('cartAddr');
     var notesInput=document.getElementById('cartNotes');
+    var pickupTimeInput=document.getElementById('cartPickupTime');
+    var dineinTimeInput=document.getElementById('cartDineinTime');
+    var partySizeInput=document.getElementById('cartPartySize');
     var name=nameInput?nameInput.value.trim():'';
     var addr=addrInput?addrInput.value.trim():'';
     var notes=notesInput?notesInput.value.trim():'';
+    var pickupTime=pickupTimeInput?pickupTimeInput.value:'';
+    var dineinTime=dineinTimeInput?dineinTimeInput.value:'';
+    var partySize=partySizeInput?partySizeInput.value:'';
 
-    var svcLabel={delivery:'Delivery',pickup:'Para llevar',dinein:'Comer en el restaurante'};
+    var subtotal=getTotal();
+    var fee=(selectedService==='delivery')?2:0;
+    var total=subtotal+fee;
+
+    var svcLabel={delivery:'Delivery',pickup:'Para llevar',dinein:'Reservacion en restaurante'};
     var msg='Hola! Quiero hacer un pedido:\n\n';
     cart.forEach(function(item){
       msg+=item.qty+'x '+item.name+' ($'+item.price.toFixed(2)+')\n';
     });
-    msg+='\n*Total: $'+getTotal().toFixed(2)+'*\n';
+    if(fee>0) msg+='\nEnvio: +$2.00';
+    msg+='\n*Total: $'+total.toFixed(2)+'*\n';
     msg+='\nServicio: '+svcLabel[selectedService];
     if(name) msg+='\nNombre: '+name;
     if(selectedService==='delivery'&&addr) msg+='\nDireccion: '+addr;
+    if(selectedService==='pickup'&&pickupTime) msg+='\nHora de recogida: '+pickupTime;
+    if(selectedService==='dinein'){
+      if(dineinTime) msg+='\nHora de llegada: '+dineinTime;
+      if(partySize) msg+='\nPersonas: '+partySize;
+    }
     if(notes) msg+='\nNotas: '+notes;
     msg+='\n\nGracias!';
 
