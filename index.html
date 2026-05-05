@@ -552,7 +552,8 @@ img{max-width:100%;display:block}
   .mobile-cta-btn:active{transform:scale(.92);opacity:.85}
 
   /* Cart floating btn mobile adjust */
-  .cart-fab{bottom:calc(var(--mobile-cta-h) + 16px + env(safe-area-inset-bottom,0px))}
+  .cart-fab{bottom:calc(var(--mobile-cta-h) + 12px + env(safe-area-inset-bottom,0px));right:12px;width:52px;height:52px}
+  .cart-fab svg{width:24px;height:24px}
 
   /* Touch feedback */
   .btn:active{transform:scale(.95) !important;opacity:.9}
@@ -586,12 +587,12 @@ img{max-width:100%;display:block}
 .menu-item .add-btn:hover{background:var(--brand-red);color:#fff;transform:translateY(-50%) scale(1.1)}
 .menu-item .add-btn:active{transform:translateY(-50%) scale(.9)}
 
-.cart-fab{position:fixed;bottom:24px;right:24px;z-index:80;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--brand-red-dark),var(--brand-red));color:#fff;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(201,60,47,.4);cursor:pointer;transition:var(--transition);-webkit-tap-highlight-color:transparent}
+.cart-fab{position:fixed;bottom:24px;right:16px;z-index:80;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--brand-red-dark),var(--brand-red));color:#fff;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(201,60,47,.4);cursor:pointer;transition:var(--transition);-webkit-tap-highlight-color:transparent}
 .cart-fab.visible{display:flex}
 .cart-fab:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(201,60,47,.5)}
 .cart-fab:active{transform:scale(.92)}
-.cart-fab svg{width:28px;height:28px}
-.cart-fab-badge{position:absolute;top:-4px;right:-4px;width:24px;height:24px;border-radius:50%;background:var(--brand-gold);color:var(--dark);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.cart-fab svg{width:26px;height:26px}
+.cart-fab-badge{position:absolute;top:-2px;right:-2px;width:22px;height:22px;border-radius:50%;background:var(--brand-gold);color:var(--dark);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.2)}
 
 .cart-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;align-items:flex-end;justify-content:center;padding:0}
 .cart-modal-overlay.open{display:flex}
