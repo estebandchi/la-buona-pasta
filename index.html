@@ -108,9 +108,60 @@
           {"@type": "MenuItem", "name": "Sambuca Espresso", "offers": {"@type": "Offer", "price": "3.10", "priceCurrency": "USD"}}
         ]
       },
-      {"@type": "MenuSection", "name": "Pastas", "description": "Pasta fresca hecha en casa con salsas del día. Menú completo disponible por WhatsApp."},
-      {"@type": "MenuSection", "name": "Pizzas", "description": "Pizza artesanal horneada al momento. Menú completo disponible por WhatsApp."},
-      {"@type": "MenuSection", "name": "Postres", "description": "Panna cotta, tiramisú y dulces clásicos italianos."}
+      {
+        "@type": "MenuSection",
+        "name": "Fettuccini (Pastas)",
+        "description": "Pasta fresca hecha en casa todos los días",
+        "hasMenuItem": [
+          {"@type": "MenuItem", "name": "Salsa Alfredo", "description": "Fettuccini en salsa cremosa de queso parmesano y mantequilla", "offers": {"@type": "Offer", "price": "11.70", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Carbonara Parmesano", "description": "Tocino crocante, huevo y queso parmesano en salsa cremosa", "offers": {"@type": "Offer", "price": "13.50", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Salsa Pomodoro", "description": "Salsa casera de tomate fresco con albahaca", "offers": {"@type": "Offer", "price": "11.70", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Camarones", "description": "Fettuccini con camarones en salsa cremosa", "offers": {"@type": "Offer", "price": "14.90", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Bolognesa", "description": "Salsa de carne casera al estilo italiano", "offers": {"@type": "Offer", "price": "13.50", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Pesto de Albahaca", "description": "Pesto fresco de albahaca con parmesano y piñones", "offers": {"@type": "Offer", "price": "12.90", "priceCurrency": "USD"}}
+        ]
+      },
+      {
+        "@type": "MenuSection",
+        "name": "Risotto",
+        "hasMenuItem": [
+          {"@type": "MenuItem", "name": "Risotto de Camarones", "description": "Arroz cremoso con camarones salteados", "offers": {"@type": "Offer", "price": "14.90", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Risotto de Champiñones", "description": "Arroz cremoso con champiñones frescos y parmesano", "offers": {"@type": "Offer", "price": "12.90", "priceCurrency": "USD"}}
+        ]
+      },
+      {
+        "@type": "MenuSection",
+        "name": "Especialidades",
+        "hasMenuItem": [
+          {"@type": "MenuItem", "name": "Filet Mignon", "description": "Corte fino de res a la parrilla en salsa de la casa", "offers": {"@type": "Offer", "price": "17.70", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Filete de Pescado", "description": "Filete en salsa cremosa sobre cama de vegetales", "offers": {"@type": "Offer", "price": "16.40", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Rollos de Pollo", "description": "Rollos de pollo rellenos en salsa de champiñones", "offers": {"@type": "Offer", "price": "14.90", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Costilla de Maiale", "description": "Costilla de cerdo al carbón con guarnición", "offers": {"@type": "Offer", "price": "16.70", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Pollo a la Naranja", "description": "Filete de pollo en reducción de naranja", "offers": {"@type": "Offer", "price": "14.20", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Salmón", "description": "Filete de salmón a la parrilla con vegetales frescos", "offers": {"@type": "Offer", "price": "16.70", "priceCurrency": "USD"}}
+        ]
+      },
+      {
+        "@type": "MenuSection",
+        "name": "Pizza Estilo Chicago",
+        "description": "Deep-dish pizza artesanal",
+        "hasMenuItem": [
+          {"@type": "MenuItem", "name": "Rellena de Verduras", "description": "Champiñones, espinaca, cebolla, pimientos, zucchini, tomate, mozzarella", "offers": {"@type": "Offer", "price": "21.90", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Rellena de Carnes", "description": "Variedad de carnes selectas con mozzarella fundida", "offers": {"@type": "Offer", "price": "21.50", "priceCurrency": "USD"}}
+        ]
+      },
+      {
+        "@type": "MenuSection",
+        "name": "Postres",
+        "hasMenuItem": [
+          {"@type": "MenuItem", "name": "Panna Cotta", "description": "Crema italiana con reducción de fruta", "offers": {"@type": "Offer", "price": "4.40", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Crostata di Marmellata", "description": "Masa italiana rellena de mermelada de mora y frutos rojos", "offers": {"@type": "Offer", "price": "4.50", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Tiramisú", "description": "Capas de bizcocho con espresso y crema de mascarpone", "offers": {"@type": "Offer", "price": "5.60", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Copa de Helado", "description": "Helado artesanal con fresa", "offers": {"@type": "Offer", "price": "3.60", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Porción de Torta con Helado", "description": "Torta del día con helado artesanal", "offers": {"@type": "Offer", "price": "4.50", "priceCurrency": "USD"}},
+          {"@type": "MenuItem", "name": "Rompope de la Mamma", "description": "Crema dulce casera estilo rompope", "offers": {"@type": "Offer", "price": "2.50", "priceCurrency": "USD"}}
+        ]
+      }
     ]
   },
   "acceptsReservations": "true",
@@ -782,22 +833,27 @@ img{max-width:100%;display:block}
       <p>Desde pastas clásicas hasta postres irresistibles, nuestro menú tiene algo para cada gusto.</p>
     </div>
     <div class="menu-categories">
-      <div class="menu-cat fade-up" style="transition-delay:.1s" onclick="scrollToMenu('menu-cta-wa')" role="button" tabindex="0">
+      <div class="menu-cat fade-up" style="transition-delay:.1s" onclick="scrollToMenu('menu-pastas')" role="button" tabindex="0">
         <div class="menu-cat-icon" aria-hidden="true">&#127837;</div>
         <h3>Pastas</h3>
         <p>Frescas, artesanales y con salsas preparadas del día</p>
       </div>
-      <div class="menu-cat fade-up" style="transition-delay:.2s" onclick="scrollToMenu('menu-cta-wa')" role="button" tabindex="0">
+      <div class="menu-cat fade-up" style="transition-delay:.15s" onclick="scrollToMenu('menu-especialidades')" role="button" tabindex="0">
+        <div class="menu-cat-icon" aria-hidden="true">&#127860;</div>
+        <h3>Especialidades</h3>
+        <p>Filet mignon, salmón, costilla y más</p>
+      </div>
+      <div class="menu-cat fade-up" style="transition-delay:.2s" onclick="scrollToMenu('menu-pizza')" role="button" tabindex="0">
         <div class="menu-cat-icon" aria-hidden="true">&#127829;</div>
         <h3>Pizzas</h3>
-        <p>Masa artesanal con ingredientes de primera calidad</p>
+        <p>Estilo Chicago, deep-dish con ingredientes premium</p>
       </div>
-      <div class="menu-cat fade-up" style="transition-delay:.3s" onclick="scrollToMenu('menu-cta-wa')" role="button" tabindex="0">
+      <div class="menu-cat fade-up" style="transition-delay:.25s" onclick="scrollToMenu('menu-postres')" role="button" tabindex="0">
         <div class="menu-cat-icon" aria-hidden="true">&#127856;</div>
         <h3>Postres</h3>
-        <p>Panna cotta, tiramisu y dulces clásicos italianos</p>
+        <p>Panna cotta, tiramisú y dulces clásicos italianos</p>
       </div>
-      <div class="menu-cat fade-up" style="transition-delay:.4s" onclick="scrollToMenu('menu-bebidas')" role="button" tabindex="0">
+      <div class="menu-cat fade-up" style="transition-delay:.3s" onclick="scrollToMenu('menu-bebidas')" role="button" tabindex="0">
         <div class="menu-cat-icon" aria-hidden="true">&#9749;</div>
         <h3>Bebidas</h3>
         <p>Café, jugos naturales, vinos y cócteles</p>
@@ -849,6 +905,78 @@ img{max-width:100%;display:block}
       </div>
     </div>
 
+    <!-- Fettuccini / Pastas -->
+    <div id="menu-pastas" class="menu-detail fade-up">
+      <div class="menu-detail-header">
+        <span>&#127837;</span>
+        <h3>Fettuccini (Pastas)</h3>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div><span class="menu-item-name">Salsa Alfredo</span><br><span class="menu-item-desc">Fettuccini en salsa cremosa de queso parmesano y mantequilla</span></div><span class="menu-item-price">$11.70</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Carbonara Parmesano</span><br><span class="menu-item-desc">Tocino crocante, huevo y queso parmesano en salsa cremosa</span></div><span class="menu-item-price">$13.50</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Salsa Pomodoro</span><br><span class="menu-item-desc">Salsa casera de tomate fresco con albahaca</span></div><span class="menu-item-price">$11.70</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Camarones</span><br><span class="menu-item-desc">Fettuccini con camarones en salsa cremosa</span></div><span class="menu-item-price">$14.90</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Bolognesa</span><br><span class="menu-item-desc">Salsa de carne casera al estilo italiano</span></div><span class="menu-item-price">$13.50</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Pesto de Albahaca</span><br><span class="menu-item-desc">Pesto fresco de albahaca con parmesano y piñones</span></div><span class="menu-item-price">$12.90</span></div>
+      </div>
+    </div>
+
+    <!-- Risotto -->
+    <div class="menu-detail fade-up">
+      <div class="menu-detail-header">
+        <span>&#127858;</span>
+        <h3>Risotto</h3>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div><span class="menu-item-name">Risotto de Camarones</span><br><span class="menu-item-desc">Arroz cremoso con camarones salteados</span></div><span class="menu-item-price">$14.90</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Risotto de Champiñones</span><br><span class="menu-item-desc">Arroz cremoso con champiñones frescos y parmesano</span></div><span class="menu-item-price">$12.90</span></div>
+      </div>
+    </div>
+
+    <!-- Especialidades -->
+    <div id="menu-especialidades" class="menu-detail fade-up">
+      <div class="menu-detail-header">
+        <span>&#127860;</span>
+        <h3>Especialidades</h3>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div><span class="menu-item-name">Filet Mignon</span><br><span class="menu-item-desc">Corte fino de res a la parrilla en salsa de la casa</span></div><span class="menu-item-price">$17.70</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Filete de Pescado</span><br><span class="menu-item-desc">Filete en salsa cremosa sobre cama de vegetales</span></div><span class="menu-item-price">$16.40</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Rollos de Pollo</span><br><span class="menu-item-desc">Rollos de pollo rellenos en salsa de champiñones</span></div><span class="menu-item-price">$14.90</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Costilla de Maiale</span><br><span class="menu-item-desc">Costilla de cerdo al carbón con guarnición</span></div><span class="menu-item-price">$16.70</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Pollo a la Naranja</span><br><span class="menu-item-desc">Filete de pollo en reducción de naranja</span></div><span class="menu-item-price">$14.20</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Salmón</span><br><span class="menu-item-desc">Filete de salmón a la parrilla con vegetales frescos</span></div><span class="menu-item-price">$16.70</span></div>
+      </div>
+    </div>
+
+    <!-- Pizza Estilo Chicago -->
+    <div id="menu-pizza" class="menu-detail fade-up">
+      <div class="menu-detail-header">
+        <span>&#127829;</span>
+        <h3>Pizza Estilo Chicago</h3>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div><span class="menu-item-name">Rellena de Verduras</span><br><span class="menu-item-desc">Champiñones, espinaca, cebolla, pimientos, zucchini, tomate, mozzarella</span></div><span class="menu-item-price">$21.90</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Rellena de Carnes</span><br><span class="menu-item-desc">Variedad de carnes selectas con mozzarella fundida</span></div><span class="menu-item-price">$21.50</span></div>
+      </div>
+    </div>
+
+    <!-- Postres -->
+    <div id="menu-postres" class="menu-detail fade-up">
+      <div class="menu-detail-header">
+        <span>&#127856;</span>
+        <h3>Postres</h3>
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div><span class="menu-item-name">Panna Cotta</span><br><span class="menu-item-desc">Crema italiana con reducción de fruta</span></div><span class="menu-item-price">$4.40</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Crostata di Marmellata</span><br><span class="menu-item-desc">Masa italiana rellena de mermelada de mora y frutos rojos</span></div><span class="menu-item-price">$4.50</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Tiramisú</span><br><span class="menu-item-desc">Capas de bizcocho con espresso y crema de mascarpone</span></div><span class="menu-item-price">$5.60</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Copa de Helado</span><br><span class="menu-item-desc">Helado artesanal con fresa</span></div><span class="menu-item-price">$3.60</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Porción de Torta con Helado</span><br><span class="menu-item-desc">Torta del día con helado artesanal</span></div><span class="menu-item-price">$4.50</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Rompope de la Mamma</span><br><span class="menu-item-desc">Crema dulce casera estilo rompope</span></div><span class="menu-item-price">$2.50</span></div>
+      </div>
+    </div>
+
     <!-- Bebidas -->
     <div id="menu-bebidas" class="menu-detail fade-up">
       <div class="menu-detail-header">
@@ -857,20 +985,30 @@ img{max-width:100%;display:block}
       </div>
       <div class="menu-items">
         <div class="menu-item"><div><span class="menu-item-name">Espresso</span></div><span class="menu-item-price">$2.50</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Café Americano</span></div><span class="menu-item-price">$2.50</span></div>
         <div class="menu-item"><div><span class="menu-item-name">Cappuccino</span></div><span class="menu-item-price">$4.20</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Mocaccino</span></div><span class="menu-item-price">$4.20</span></div>
         <div class="menu-item"><div><span class="menu-item-name">Chocolate de la Nonna</span></div><span class="menu-item-price">$4.40</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Sambuca Espresso</span></div><span class="menu-item-price">$3.10</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Café Freddo</span></div><span class="menu-item-price">$3.10</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Frapuchino</span></div><span class="menu-item-price">$4.80</span></div>
         <div class="menu-item"><div><span class="menu-item-name">Horchata de la Casa</span></div><span class="menu-item-price">$2.60</span></div>
         <div class="menu-item"><div><span class="menu-item-name">Jugo de Fruta</span></div><span class="menu-item-price">$3.60</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Batido de Fruta</span></div><span class="menu-item-price">$4.30</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Té Helado</span></div><span class="menu-item-price">$1.80</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Gaseosa</span></div><span class="menu-item-price">$1.90</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Agua con Gas</span></div><span class="menu-item-price">$1.90</span></div>
         <div class="menu-item"><div><span class="menu-item-name">Copa Vino de la Casa</span></div><span class="menu-item-price">$5.60</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Copa Vino Hervido</span></div><span class="menu-item-price">$6.50</span></div>
+        <div class="menu-item"><div><span class="menu-item-name">Cerveza (Club, Budweiser)</span></div><span class="menu-item-price">$3.60</span></div>
         <div class="menu-item"><div><span class="menu-item-name">Cerveza (Corona, Stella, Heineken)</span></div><span class="menu-item-price">$5.60</span></div>
-        <div class="menu-item"><div><span class="menu-item-name">Sambuca Espresso</span></div><span class="menu-item-price">$3.10</span></div>
       </div>
     </div>
 
     <div id="menu-cta-wa" class="menu-cta fade-up">
-      <a href="https://wa.me/593994697251?text=Hola%2C%20me%20gustaría%20ver%20el%20menu%20completo%20de%20pastas%20y%20pizzas" target="_blank" rel="noopener" class="btn btn-whatsapp" aria-label="Pedir el menú completo por WhatsApp">
+      <a href="https://wa.me/593994697251?text=Hola%2C%20me%20gustaría%20hacer%20una%20reserva" target="_blank" rel="noopener" class="btn btn-whatsapp" aria-label="Reservar mesa por WhatsApp">
         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.39-1.583l-.386-.232-2.64.885.885-2.64-.232-.386A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        Pide el Menú Completo de Pastas y Pizzas por WhatsApp
+        Reservar Mesa por WhatsApp
       </a>
     </div>
   </div>
