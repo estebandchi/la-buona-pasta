@@ -540,6 +540,9 @@ img{max-width:100%;display:block}
   .contact-map{min-height:260px;border-radius:var(--radius-sm)}
   .contact-map iframe{min-height:260px}
 
+  /* Bottom spacing for fixed CTA bar */
+  main{padding-bottom:calc(var(--mobile-cta-h) + env(safe-area-inset-bottom,0px))}
+
   /* Footer */
   .footer{padding:32px 16px calc(32px + var(--mobile-cta-h) + env(safe-area-inset-bottom,0px))}
   .footer-inner{flex-direction:column;text-align:center;gap:16px}
