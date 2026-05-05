@@ -586,10 +586,15 @@ img{max-width:100%;display:block}
 }
 
 /* Order Cart System */
-.menu-item{position:relative;padding-right:44px}
+.menu-item{position:relative;padding-right:100px}
 .menu-item .add-btn{position:absolute;right:0;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(201,60,47,.08);color:var(--brand-red);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;cursor:pointer;transition:var(--transition);border:1.5px solid rgba(201,60,47,.15);flex-shrink:0}
 .menu-item .add-btn:hover{background:var(--brand-red);color:#fff;transform:translateY(-50%) scale(1.1)}
 .menu-item .add-btn:active{transform:translateY(-50%) scale(.9)}
+.menu-item .qty-ctrl{position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:0;background:var(--brand-red);border-radius:20px;overflow:hidden;box-shadow:0 2px 8px rgba(201,60,47,.25)}
+.menu-item .qty-ctrl button{width:32px;height:32px;border:none;background:transparent;color:#fff;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.menu-item .qty-ctrl button:hover{background:rgba(255,255,255,.15)}
+.menu-item .qty-ctrl button:active{background:rgba(0,0,0,.1)}
+.menu-item .qty-ctrl span{min-width:24px;text-align:center;font-size:14px;font-weight:800;color:#fff}
 
 .cart-fab{position:fixed;bottom:24px;right:16px;z-index:95;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--brand-red-dark),var(--brand-red));color:#fff;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(201,60,47,.4);cursor:pointer;transition:var(--transition);-webkit-tap-highlight-color:transparent}
 .cart-fab.visible{display:flex}
@@ -1284,24 +1289,70 @@ img{max-width:100%;display:block}
     var nameEl=item.querySelector('.menu-item-name');
     var priceEl=item.querySelector('.menu-item-price');
     if(!nameEl||!priceEl) return;
+    var name=nameEl.textContent.trim();
+    var priceText=priceEl.textContent.replace(/[^0-9.,]/g,'').replace(',','.');
+    var price=parseFloat(priceText);
+    if(isNaN(price)) return;
+
     var btn=document.createElement('button');
     btn.className='add-btn';
     btn.setAttribute('aria-label','Agregar al pedido');
     btn.textContent='+';
+
+    var qtyCtrl=document.createElement('div');
+    qtyCtrl.className='qty-ctrl';
+    qtyCtrl.style.display='none';
+    var minusBtn=document.createElement('button');
+    minusBtn.textContent='−';
+    minusBtn.setAttribute('aria-label','Quitar uno');
+    var qtySpan=document.createElement('span');
+    qtySpan.textContent='0';
+    var plusBtn=document.createElement('button');
+    plusBtn.textContent='+';
+    plusBtn.setAttribute('aria-label','Agregar uno');
+    qtyCtrl.appendChild(minusBtn);
+    qtyCtrl.appendChild(qtySpan);
+    qtyCtrl.appendChild(plusBtn);
+
     btn.addEventListener('click',function(e){
       e.stopPropagation();
-      var name=nameEl.textContent.trim();
-      var priceText=priceEl.textContent.replace(/[^0-9.,]/g,'').replace(',','.');
-      var price=parseFloat(priceText);
-      if(isNaN(price)) return;
       addToCart(name,price);
-      btn.textContent='✓';
-      btn.style.background='var(--brand-red)';
-      btn.style.color='#fff';
-      setTimeout(function(){btn.textContent='+';btn.style.background='';btn.style.color='';},600);
+      syncItemQty(name,btn,qtyCtrl,qtySpan);
     });
+    plusBtn.addEventListener('click',function(e){
+      e.stopPropagation();
+      addToCart(name,price);
+      syncItemQty(name,btn,qtyCtrl,qtySpan);
+    });
+    minusBtn.addEventListener('click',function(e){
+      e.stopPropagation();
+      removeFromCartByName(name);
+      syncItemQty(name,btn,qtyCtrl,qtySpan);
+    });
+
     item.appendChild(btn);
+    item.appendChild(qtyCtrl);
+    item._qtySync=function(){syncItemQty(name,btn,qtyCtrl,qtySpan);};
   });
+
+  function syncItemQty(name,btn,qtyCtrl,qtySpan){
+    var ci=cart.find(function(i){return i.name===name;});
+    var qty=ci?ci.qty:0;
+    if(qty>0){
+      btn.style.display='none';
+      qtyCtrl.style.display='flex';
+      qtySpan.textContent=qty;
+    }else{
+      btn.style.display='';
+      qtyCtrl.style.display='none';
+    }
+  }
+
+  function syncAllItems(){
+    document.querySelectorAll('.menu-item').forEach(function(item){
+      if(item._qtySync) item._qtySync();
+    });
+  }
 
   function addToCart(name,price){
     var existing=cart.find(function(i){return i.name===name;});
@@ -1310,16 +1361,26 @@ img{max-width:100%;display:block}
     updateCartUI();
   }
 
+  function removeFromCartByName(name){
+    var idx=cart.findIndex(function(i){return i.name===name;});
+    if(idx===-1) return;
+    cart[idx].qty--;
+    if(cart[idx].qty<=0) cart.splice(idx,1);
+    updateCartUI();
+  }
+
   function removeFromCart(idx){
     cart[idx].qty--;
     if(cart[idx].qty<=0) cart.splice(idx,1);
     updateCartUI();
+    syncAllItems();
     renderCartModal();
   }
 
   function increaseItem(idx){
     cart[idx].qty++;
     updateCartUI();
+    syncAllItems();
     renderCartModal();
   }
 
@@ -1355,6 +1416,23 @@ img{max-width:100%;display:block}
     return cart.reduce(function(s,i){return s+i.price*i.qty;},0);
   }
 
+  function timeOptions(){
+    var opts='';
+    for(var h=12;h<=21;h++){
+      for(var m=0;m<60;m+=30){
+        if(h===21&&m===30){opts+='<option value="21:30">9:30 PM</option>';break;}
+        var hh=h<10?'0'+h:''+h;
+        var mm=m<10?'0'+m:''+m;
+        var val=hh+':'+mm;
+        var hr12=h>12?h-12:h;
+        var ampm=h>=12?'PM':'AM';
+        var label=hr12+':'+ mm+' '+ampm;
+        opts+='<option value="'+val+'">'+label+'</option>';
+      }
+    }
+    return opts;
+  }
+
   function renderCartModal(){
     if(cart.length===0){
       cartBody.innerHTML='<div class="cart-empty">Tu pedido esta vacio.<br>Agrega platos desde el menu.</div>';
@@ -1384,8 +1462,8 @@ img{max-width:100%;display:block}
       +'</div></div>';
     html+='<div><label>Tu nombre</label><input type="text" id="cartName" placeholder="Nombre para el pedido"></div>';
     html+='<div class="addr-field'+(selectedService==='delivery'?' visible':'')+'" id="addrField"><label>Direccion de entrega</label><input type="text" id="cartAddr" placeholder="Calle y referencia"></div>';
-    html+='<div class="time-field'+(selectedService==='pickup'?' visible':'')+'" id="pickupTimeField"><label>Hora de recogida</label><input type="time" id="cartPickupTime" min="12:00" max="22:00"></div>';
-    html+='<div class="dinein-field'+(selectedService==='dinein'?' visible':'')+'" id="dineinField"><label>Hora de llegada</label><input type="time" id="cartDineinTime" min="12:00" max="22:00"><label>Numero de personas</label><input type="number" id="cartPartySize" min="1" max="20" placeholder="2"></div>';
+    html+='<div class="time-field'+(selectedService==='pickup'?' visible':'')+'" id="pickupTimeField"><label>Hora de recogida</label><select id="cartPickupTime"><option value="">Selecciona hora</option>'+timeOptions()+'</select></div>';
+    html+='<div class="dinein-field'+(selectedService==='dinein'?' visible':'')+'" id="dineinField"><label>Hora de llegada</label><select id="cartDineinTime"><option value="">Selecciona hora</option>'+timeOptions()+'</select><label>Numero de personas</label><input type="number" id="cartPartySize" min="1" max="20" placeholder="2"></div>';
     html+='<div><label>Notas (opcional)</label><input type="text" id="cartNotes" placeholder="Sin cebolla, extra queso, etc."></div>';
     html+='<button class="cart-send-btn" onclick="sendOrder()">'
       +'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.39-1.583l-.386-.232-2.64.885.885-2.64-.232-.386A9.94 9.94 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>'
